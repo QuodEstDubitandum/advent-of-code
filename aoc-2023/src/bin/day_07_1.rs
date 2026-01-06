@@ -5,17 +5,14 @@ fn main() {
     let mut chars: HashMap<char, u8> = HashMap::new();
     // maps from hand (7 for fives, 6 for fours ... 1 for high card) to the corresponding (hand, bid)
     let mut hands: HashMap<u8, Vec<(&str, u32)>> = HashMap::new();
-    let mut occurances: Vec<u8> = Vec::with_capacity(5);
-    let mut hand = "";
-    let mut bid = "";
 
     for line in lines {
-        (hand, bid) = line.split_once(" ").unwrap();
+        let (hand, bid) = line.split_once(" ").unwrap();
         for ch in hand.chars() {
             chars.entry(ch).and_modify(|occ| *occ += 1).or_insert(1);
         }
 
-        occurances = chars.values().copied().collect();
+        let mut occurances: Vec<u8> = chars.values().copied().collect();
         occurances.sort_unstable_by(|a, b| b.cmp(a));
         chars.clear();
 
@@ -54,10 +51,9 @@ fn main() {
 
     let mut result = 0;
     let mut rank = 1;
-    let mut current_hands: Vec<(&str, u32)> = Vec::new();
     for i in 1..=7 {
         if let Some(v) = hands.get(&i) {
-            current_hands = v.clone();
+            let mut current_hands = v.clone();
             // smallest first
             current_hands.sort_unstable_by(|a, b| PokerOrdering(a.0).cmp(&PokerOrdering(b.0)));
 

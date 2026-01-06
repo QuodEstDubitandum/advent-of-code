@@ -13,13 +13,12 @@ fn main() {
         }
     }
 
-    let mut parts: Vec<&str> = Vec::new();
     let mut nodes: HashMap<String, (String, String)> = HashMap::new();
     let mut current_nodes: Vec<String> = Vec::new();
 
     lines.next().unwrap();
     for line in lines {
-        parts = line.split_ascii_whitespace().collect();
+        let parts: Vec<&str> = line.split_ascii_whitespace().collect();
         nodes.insert(parts[0].to_string(), (parts[2].replace(['(', ','], ""), parts[3].replace(')', "")));
         if parts[0].ends_with("A") {
             current_nodes.push(parts[0].to_string());

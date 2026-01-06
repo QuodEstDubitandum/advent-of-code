@@ -6,9 +6,6 @@ fn main() {
     source.sort_unstable();
     let mut destination: Vec<u64> = source.to_vec();
 
-    let mut numbers: Vec<u64> = Vec::with_capacity(3);
-    let mut sorted_pos = 0usize;
-
     for line in lines {
         if line.is_empty() {
             continue;
@@ -20,8 +17,8 @@ fn main() {
             continue;
         }
 
-        numbers = line.split_ascii_whitespace().map(|num| num.parse::<u64>().unwrap()).collect();
-        sorted_pos = match source.binary_search(&numbers[1]) {
+        let numbers: Vec<u64> = line.split_ascii_whitespace().map(|num| num.parse::<u64>().unwrap()).collect();
+        let sorted_pos = match source.binary_search(&numbers[1]) {
             Ok(pos) => pos,
             Err(pos) => pos,
         };

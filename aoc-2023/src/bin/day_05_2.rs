@@ -16,7 +16,6 @@ fn main() {
         .map(|c| (c[0], c[0] + c[1] - 1))
         .collect();
     let mut destination: Vec<(u64, u64)> = source.clone();
-    let mut numbers: Vec<u64> = Vec::with_capacity(3);
 
     for line in lines {
         if line.is_empty() {
@@ -28,7 +27,7 @@ fn main() {
             continue;
         }
 
-        numbers = line.split_ascii_whitespace().map(|num| num.parse::<u64>().unwrap()).collect();
+        let numbers: Vec<u64> = line.split_ascii_whitespace().map(|num| num.parse::<u64>().unwrap()).collect();
         for i in 0..source.len() {
             let start = max(source[i].0, numbers[1]);
             let end = min(source[i].1, numbers[1] + numbers[2] - 1);
