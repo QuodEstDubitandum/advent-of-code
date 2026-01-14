@@ -25,7 +25,6 @@ fn main() {
 
     let rows = dp.len() - 1;
     let cols = dp[0].len() - 1;
-    println!("ROWS: {rows}, COLS: {cols}");
 
     // (pos_x, pos_y, heading_to)
     let mut stack: VecDeque<Tile> = VecDeque::new();
